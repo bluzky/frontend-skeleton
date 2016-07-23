@@ -67,7 +67,7 @@ gulp.task('copy-js', function(){
 gulp.task('copy-custom', function(){
   for(var source in config.custom){
     gulp.src(source)
-        .pipe(gulp.dest(config.custom[source]));
+        .pipe(gulp.dest(path.join(config.destinationDir, config.custom[source])));
   }
 });
 

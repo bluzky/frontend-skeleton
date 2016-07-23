@@ -17,14 +17,6 @@
   "gulpConfig": {
     "sourceDir": "source/",
     "destinationDir": "../assets/",
-    "destinationPaths": {
-      "css": "../assets/css/",
-      "js": "../assets/js/",
-      "scss": "../assets/css/",
-      "vendor": "../assets/vendor/",
-      "fonts": "../assets/fonts/",
-      "image": "../assets/img/"
-    },
     "sourcesPaths": {
       "css": "source/css/",
       "js": "source/js/",
@@ -32,6 +24,14 @@
       "vendor": "source/vendor/",
       "fonts": "source/fonts/*",
       "image": "source/img/"
+    },
+    "destinationPaths": {
+      "css": "../assets/css/",
+      "js": "../assets/js/",
+      "scss": "../assets/css/",
+      "vendor": "../assets/vendor/",
+      "fonts": "../assets/fonts/",
+      "image": "../assets/img/"
     },
     "custom": {
       "bower_components/jquery/dist/jquery.min.js": "../assets/lib/js/",
