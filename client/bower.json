@@ -1,0 +1,17 @@
+{
+  "name": "template",
+  "description": "",
+  "main": "index.js",
+  "authors": [
+    "Dung Nguyen <bluesky.1289@gmail.com>"
+  ],
+  "license": "ISC",
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
