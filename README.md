@@ -32,28 +32,27 @@ You can config source and destination and other paths in `client/package.json` f
   ...,
   "gulpConfig": {
     "sourceDir": "source/",
-    "destinationDir": "../assets/", // build/output directory
+    "destinationDir": "../static/assets/",
     "sourcesPaths": {
-      "css": "source/css/",
-      "js": "source/js/",
-      "scss": "source/scss/",
-      "vendor": "source/vendor/",
-      "fonts": "source/fonts/*",
-      "image": "source/img/"
+      "css": "css/",
+      "js": "js/",
+      "scss": "scss/",
+      "vendor": "vendor/",
+      "fonts": "fonts/*",
+      "image": "img/"
     },
     "destinationPaths": {
-      "css": "../assets/css/",
-      "js": "../assets/js/",
-      "scss": "../assets/css/",
-      "vendor": "../assets/vendor/",
-      "fonts": "../assets/fonts/",
-      "image": "../assets/img/"
+      "css": "css/",
+      "js": "js/",
+      "scss": "css/",
+      "vendor": "vendor/",
+      "fonts": "fonts/",
+      "image": "img/"
     },
     "custom": {
       "bower_components/jquery/dist/jquery.min.js": "lib/js/",
-      "bower_components/bootstrap/dist/js/bootstrap.min.js": "lib/js/",
-      "bower_components/bootstrap/dist/css/bootstrap.min.css": "lib/css/",
-      "bower_components/bootstrap/dist/fonts/*": "lib/fonts/"
+      "bower_components/font-awesome/fonts/*": "lib/fonts/",
+      "bower_components/font-awesome/css/font-awesome.min.css": "lib/css/"
     }
   }
 }
@@ -62,5 +61,8 @@ You can config source and destination and other paths in `client/package.json` f
 - `custom` is custom mapping source file and destination build directory.  
 `"sourceFile" : "outputDir"`   
 `outputDir` is relative path in `destinationDir`   
+`sourcesPaths` are relative paths  
+`destinationPaths` are relative paths  
+
 **Example:**  
 `lib/js/' turn into '../assets/lib/js/`

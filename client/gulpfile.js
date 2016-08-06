@@ -30,6 +30,14 @@ var data = fs.readFileSync("package.json");
 var config = JSON.parse(data.toString());
 config = config.gulpConfig;
 
+var desPath = function(pathKey){
+  return path.join(config.destinationDir, config.destinationPaths[pathKey]);
+}
+
+var srcPath = function(pathKey){
+  return path.join(config.sourceDir, config.sourcesPaths[pathKey]);
+}
+
 
 /*
 * Clean build directory
@@ -43,10 +51,10 @@ gulp.task('clean', function(){
 * Copy css file to build directory recursively
 */
 gulp.task('copy-css', function(){
-  var paths = walkSync(config.sourcesPaths.css, [], /.*\.css/);
+  var paths = walkSync(srcPath('css'), [], /.*\.css/);
   paths.forEach(function(file, index){
     gulp.src(file)
-      .pipe(gulp.dest(config.destinationPaths.css + relativeDirpath(config.sourcesPaths.css, file)));
+      .pipe(gulp.dest(desPath('css') + relativeDirpath(srcPath('css'), file)));
   });
 });
 
@@ -54,10 +62,10 @@ gulp.task('copy-css', function(){
 * Copy javascript file to build directory recursively
 */
 gulp.task('copy-js', function(){
-  var paths = walkSync(config.sourcesPaths.js, [], /.*\.js/);
+  var paths = walkSync(srcPath('js'), [], /.*\.js/);
   paths.forEach(function(file, index){
     gulp.src(file)
-      .pipe(gulp.dest(config.destinationPaths.js + relativeDirpath(config.sourcesPaths.js, file)));
+      .pipe(gulp.dest(desPath('js') + relativeDirpath(srcPath('js'), file)));
   });
 });
 
@@ -78,28 +86,28 @@ gulp.task('copy-custom', function(){
 gulp.task('copy', function(){
   runSequence('copy-css', "copy-js", "copy-custom");
 
-  var paths = walkSync(config.sourcesPaths.vendor);
+  var paths = walkSync(srcPath('vendor'));
   paths.forEach(function(file, index){
     gulp.src(file)
-      .pipe(gulp.dest(config.destinationPaths.vendor + relativeDirpath(config.sourcesPaths.vendor, file)));
+      .pipe(gulp.dest(desPath('vendor') + relativeDirpath(srcPath('vendor'), file)));
   });
 
-  gulp.src(config.sourcesPaths.fonts)
-      .pipe(gulp.dest(config.destinationPaths.fonts));
+  gulp.src(srcPath('fonts'))
+      .pipe(gulp.dest(desPath('fonts')));
 
-  gulp.src(config.sourcesPaths.image)
-      .pipe(gulp.dest(config.destinationPaths.image));
+  gulp.src(srcPath('image'))
+      .pipe(gulp.dest(desPath('image')));
 });
 
 /*
 Compile sass source
 */
 gulp.task('scss', function(){
-  var paths = walkSync(config.sourcesPaths.scss, [], /.*\.scss/);
+  var paths = walkSync(srcPath('scss'), [], /.*\.scss/);
   paths.forEach(function(file, index){
     gulp.src(file)
       .pipe(sass())
-      .pipe(gulp.dest(config.destinationPaths.scss + relativeDirpath(config.sourcesPaths.scss, file)));
+      .pipe(gulp.dest(desPath('scss') + relativeDirpath(srcPath('scss'), file)));
   });
 });
 
@@ -121,7 +129,7 @@ gulp.task('dev', function(){
 * watch for changes in css, js, scss directory and rebuild resource
 */
 gulp.task('watch', function(){
-  gulp.watch(config.sourcesPaths.css + "**/*.css", ["copy-css"]);
-  gulp.watch(config.sourcesPaths.js + "**/*.js", ["copy-js"]);
-  gulp.watch(config.sourcesPaths.scss + "**/*.scss", ["scss"]);
+  gulp.watch(srcPath('css') + "**/*.css", ["copy-css"]);
+  gulp.watch(srcPath('js') + "**/*.js", ["copy-js"]);
+  gulp.watch(srcPath('scss') + "**/*.scss", ["scss"]);
 });
